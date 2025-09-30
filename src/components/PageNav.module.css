@@ -1,0 +1,18 @@
+/* we should just use a class name selector , we cannot select elements by their element selector like ul */
+
+.nav {
+  background: rgb(195, 160, 228);
+}
+
+/* here the module gives every class a random id , so it is name appears as className + random unique id , which helps in distinguishing  class names for every component to prevent clash */
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+:global(test) {
+  color: white;
+}
+/* if we need to use a global class , so we could implements with className prop in a component , we have to use it in this way , as here module do not gives this class a unique string (id) , which means it will keep preserving its name as it */
