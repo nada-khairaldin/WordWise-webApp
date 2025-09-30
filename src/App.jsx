@@ -7,15 +7,12 @@ import PageNotFound from "./pages/PageNotFound";
 function App() {
   return (
     <div>
-      <h1>Hello Router</h1>
-      {/* elements that will be displayed in every route ( '⚠ Not Recommended !!! ) */}
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="product" element={<Product />} />
           <Route path="pricing" element={<Pricing />} />
-          <Route path="*" element={<PageNotFound />} /> 
+          <Route path="*" element={<PageNotFound />} /> {/*fallback route*/}
         </Routes>
       </BrowserRouter>
     </div>
