@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import HomePage from "./pages/Homepage";
 import CityList from "./components/CityList";
 import { useEffect, useState } from "react";
+import CountryList from "./components/CountryList";
+import City from "./components/City";
 
 const URL = "http://localhost:9000";
 function App() {
@@ -14,7 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(function () {
-    async function fechCities() {
+    async function fetchCities() {
       try {
         setIsLoading(true);
         const res = await fetch(`${URL}/cities`);
@@ -26,7 +28,7 @@ function App() {
         setIsLoading(false);
       }
     }
-    fechCities();
+    fetchCities();
   }, []);
 
   return (
@@ -39,8 +41,16 @@ function App() {
               index
               element={<CityList cities={cities} isLoading={isLoading} />}
             />
-            <Route path="cities" element={<p> List of cities</p>} />
-            <Route path="countries" element={<p> countries</p>} />
+            <Route
+              path="cities"
+              element={<CityList cities={cities} isLoading={isLoading} />}
+            />
+            <Route path="cities/:id" element={<City />} />{" "}
+            {/*we could use params with nested and top level routers sure!*/}
+            <Route
+              path="countries"
+              element={<CountryList cities={cities} isLoading={isLoading} />}
+            />
             <Route path="form" element={<p>Form</p>} />
           </Route>
           <Route path="product" element={<Product />} />
