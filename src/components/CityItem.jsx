@@ -1,3 +1,4 @@
+import { useCities } from "../contexts/CitiesContext";
 import styles from "./CityItem.module.css";
 import { Link } from "react-router-dom";
 
@@ -11,12 +12,14 @@ const formatDate = (date) =>
 
 function CityItem({ city }) {
   const { cityName, emoji, date, id, position } = city;
-  console.log(position);
+  const { currentCity } = useCities();
   return (
     <li>
       <Link
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
-        className={styles.cityItem}
+        className={`${styles.cityItem} ${
+          id === currentCity.id ? styles["cityItem--active"] : ""
+        }`} // to let the last selected city border highlighted
       >
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
