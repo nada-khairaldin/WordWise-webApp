@@ -6,7 +6,7 @@ function BackButton() {
     <Button
       type="back"
       onClick={(e) => {
-        e.preventDefault();
+        e.preventDefault(); // by default all buttons inside form has a type of submit, so we have to prevent this default behavior from submitting the form :)
         navigate(-1);
       }}
     >

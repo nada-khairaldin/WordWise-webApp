@@ -1,3 +1,4 @@
+import ReactCountryFlag from "react-country-flag";
 import { useCities } from "../contexts/CitiesContext";
 import styles from "./CityItem.module.css";
 import { Link } from "react-router-dom";
@@ -12,7 +13,13 @@ const formatDate = (date) =>
 
 function CityItem({ city }) {
   const { cityName, emoji, date, id, position } = city;
-  const { currentCity } = useCities();
+  const { currentCity, deleteCity } = useCities();
+
+  function handleClick(e) {
+    e.preventDefault();
+    deleteCity(id);
+  }
+
   return (
     <li>
       <Link
@@ -21,10 +28,15 @@ function CityItem({ city }) {
           id === currentCity.id ? styles["cityItem--active"] : ""
         }`} // to let the last selected city border highlighted
       >
-        <span className={styles.emoji}>{emoji}</span>
+        <span className={styles.emoji}>
+          {" "}
+          <ReactCountryFlag countryCode={emoji} svg />
+        </span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>({formatDate(date)})</time>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={handleClick}>
+          &times;
+        </button>
       </Link>
     </li>
   );

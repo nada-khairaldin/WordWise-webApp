@@ -5,18 +5,27 @@ import Button from "./Button";
 import useUrlPosition from "../../hooks/useUrlPosition";
 import Spinner from "./Spinner";
 import ReactCountryFlag from "react-country-flag";
+import Message from "./Message";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useCities } from "../contexts/CitiesContext";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
-  const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
   const [lat, lng] = useUrlPosition();
   const [isLoadingCityName, setIsLoadingCityName] = useState(false);
   const [emoji, setEmoji] = useState("");
+  const [date, setDate] = useState(new Date());
+
+  const { createCity, isLoading } = useCities();
+  const navigate = useNavigate();
 
   useEffect(
     function () {
+      if (!lat && !lng) return; // without this line, api will take our position as a default when we don't have lat or lng in the url, which we don't need
       async function fetchCity() {
         try {
           setIsLoadingCityName(true);
@@ -38,9 +47,32 @@ function Form() {
     [lat, lng]
   );
 
+  function handleSubmit(e) {
+    if (!cityName || !date) return;
+    const newCity = {
+      cityName,
+      country,
+      date,
+      notes,
+      emoji,
+      position: {
+        lat,
+        lng,
+      },
+    };
+    e.preventDefault();
+    createCity(newCity);
+    navigate("/app/cities");
+  }
+
   if (isLoadingCityName) return <Spinner />;
+  if (!lat && !lng)
+    return <Message message="Start by clicking somewhere on the map" />;
   return (
-    <form className={styles.form}>
+    <form
+      className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+      onSubmit={handleSubmit}
+    >
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -49,16 +81,17 @@ function Form() {
           value={cityName}
         />
         <span className={styles.flag}>
-          <ReactCountryFlag countryCode={emoji} svg />{" "}
+          <ReactCountryFlag countryCode={emoji} svg />
         </span>
       </div>
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        <DatePicker
           id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+          selected={date}
+          onChange={(date) => setDate(date)}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
 
