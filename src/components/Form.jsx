@@ -1,24 +1,44 @@
-// "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Form.module.css";
 import BackButton from "./BackButton";
 import Button from "./Button";
-
-export function convertToEmoji(countryCode) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split("")
-    .map((char) => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
-}
+import useUrlPosition from "../../hooks/useUrlPosition";
+import Spinner from "./Spinner";
+import ReactCountryFlag from "react-country-flag";
 
 function Form() {
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+  const [lat, lng] = useUrlPosition();
+  const [isLoadingCityName, setIsLoadingCityName] = useState(false);
+  const [emoji, setEmoji] = useState("");
 
+  useEffect(
+    function () {
+      async function fetchCity() {
+        try {
+          setIsLoadingCityName(true);
+          const res = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+          );
+          const data = await res.json();
+          setCityName(data.city || data.locality || "");
+          setCountry(data.countryName);
+          setEmoji(data.countryCode);
+        } catch {
+          console.log("There is an error");
+        } finally {
+          setIsLoadingCityName(false);
+        }
+      }
+      fetchCity();
+    },
+    [lat, lng]
+  );
+
+  if (isLoadingCityName) return <Spinner />;
   return (
     <form className={styles.form}>
       <div className={styles.row}>
@@ -28,7 +48,9 @@ function Form() {
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
+        <span className={styles.flag}>
+          <ReactCountryFlag countryCode={emoji} svg />{" "}
+        </span>
       </div>
 
       <div className={styles.row}>

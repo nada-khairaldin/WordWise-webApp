@@ -1,5 +1,5 @@
 import styles from "./Map.module.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {
   MapContainer,
   TileLayer,
@@ -12,14 +12,14 @@ import { useState, useEffect } from "react";
 import { useCities } from "../contexts/CitiesContext";
 import useGeolocation from "../../hooks/useGeolocation";
 import Button from "./Button";
+import useUrlPosition from "../../hooks/useUrlPosition";
 
 function Map() {
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  const [searchParams] = useSearchParams();
-  const mapLat = searchParams.get("lat");
-  const mapLng = searchParams.get("lng");
   const { isLoading, position, getPosition } = useGeolocation();
+
+  const [mapLat, mapLng] = useUrlPosition();
 
   // we use useEffect to let async position with lat & lng , as if we write setPosition without useEffect we will have an infinite loop of rendering
   useEffect(
@@ -84,7 +84,7 @@ function DetectClick() {
   // same as center it uses hooks and should be inside a mapContainer
   const navigate = useNavigate();
   useMapEvents({
-    click: (e) => navigate(`form?lat=${e.latlng.lat}&lag=${e.latlng.lng}`), // here (e) is not event obj that comes from react , instead it is the one from leaflet, so it has a latlag attribute console.log(e)
+    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`), // here (e) is not event obj that comes from react , instead it is the one from leaflet, so it has a latlag attribute console.log(e)
   });
 }
 export default Map;
