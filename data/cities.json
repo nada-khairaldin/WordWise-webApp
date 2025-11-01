@@ -1,3 +1,52 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "ac91",
+      "cityName": "Desertines",
+      "country": "France",
+      "date": "2025-11-01T19:21:48.068Z",
+      "notes": "nice",
+      "emoji": "FR",
+      "position": {
+        "lat": "48.48748647988415",
+        "lng": "-0.8569335937500001"
+      }
+    },
+    {
+      "id": "bc2f",
+      "cityName": "Deinze",
+      "country": "Belgium",
+      "date": "2025-11-01T19:25:59.807Z",
+      "notes": "??",
+      "emoji": "BE",
+      "position": {
+        "lat": "51.7406361640977",
+        "lng": "-0.06591796875000001"
+      }
+    },
+    {
+      "id": "c440",
+      "cityName": "Vinaros",
+      "country": "Spain",
+      "date": "2025-11-01T19:28:09.263Z",
+      "notes": "mm",
+      "emoji": "ES",
+      "position": {
+        "lat": "40.53050177574321",
+        "lng": "0.48339843750000006"
+      }
+    },
+    {
+      "id": "e0f6",
+      "cityName": "Martin Munoz de las Posadas",
+      "country": "Spain",
+      "date": "2025-11-01T19:28:42.964Z",
+      "notes": "gg",
+      "emoji": "ES",
+      "position": {
+        "lat": "40.979898069620155",
+        "lng": "-4.548339843750001"
+      }
+    }
+  ]
 }

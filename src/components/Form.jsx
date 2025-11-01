@@ -36,8 +36,8 @@ function Form() {
           setCityName(data.city || data.locality || "");
           setCountry(data.countryName);
           setEmoji(data.countryCode);
-        } catch {
-          console.log("There is an error");
+        } catch (err) {
+          console.log("There is an error" , err.message);
         } finally {
           setIsLoadingCityName(false);
         }
