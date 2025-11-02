@@ -1,5 +1,5 @@
 import ReactCountryFlag from "react-country-flag";
-import { useCities } from "../contexts/CitiesContext";
+import { useCities } from "../../contexts/CitiesContext";
 import styles from "./CityItem.module.css";
 import { Link } from "react-router-dom";
 

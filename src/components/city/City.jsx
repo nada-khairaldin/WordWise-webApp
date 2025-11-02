@@ -1,9 +1,9 @@
 import styles from "./City.module.css";
-import Spinner from "./Spinner";
+import Spinner from "../spinner/Spinner";
 import { useParams } from "react-router-dom";
-import { useCities } from "../contexts/CitiesContext";
+import { useCities } from "../../contexts/CitiesContext";
 import { useEffect } from "react";
-import BackButton from "./BackButton";
+import BackButton from "../button/BackButton";
 import ReactCountryFlag from "react-country-flag";
 
 const formatDate = (date) =>

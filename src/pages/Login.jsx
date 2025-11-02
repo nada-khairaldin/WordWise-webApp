@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./Login.module.css";
-import PageNav from "../components/PageNav";
+import PageNav from "../components/pageNav/PageNav";
 import { useAuth } from "../contexts/AuthenticationContext";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 
 const URL = "http://localhost:9000";
 export default function Login() {
@@ -22,10 +22,10 @@ export default function Login() {
   useEffect(
     function () {
       if (isAuthenticated) {
-        navigate("/app" , {replace : true});   // here if we go back in the browser it will redirect us to the app page directly not login, cause isAuthenticated = true , so we navigate directly to app! we solve this by using replace , which let us replace the stack history with the previous page
+        navigate("/app", { replace: true }); // here if we go back in the browser it will redirect us to the app page directly not login, cause isAuthenticated = true , so we navigate directly to app! we solve this by using replace , which let us replace the stack history with the previous page
       }
     },
-    [isAuthenticated , navigate]
+    [isAuthenticated, navigate]
   );
 
   return (

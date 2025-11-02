@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import styles from "./Form.module.css";
-import BackButton from "./BackButton";
-import Button from "./Button";
-import useUrlPosition from "../../hooks/useUrlPosition";
-import Spinner from "./Spinner";
+import BackButton from "../button/BackButton";
+import Button from "../button/Button";
+import useUrlPosition from "../../../hooks/useUrlPosition";
+import Spinner from "../spinner/Spinner";
 import ReactCountryFlag from "react-country-flag";
-import Message from "./Message";
+import Message from "../message/Message";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useCities } from "../contexts/CitiesContext";
+import { useCities } from "../../contexts/CitiesContext";
 import { useNavigate } from "react-router-dom";
 
 function Form() {
@@ -37,7 +37,7 @@ function Form() {
           setCountry(data.countryName);
           setEmoji(data.countryCode);
         } catch (err) {
-          console.log("There is an error" , err.message);
+          console.log("There is an error", err.message);
         } finally {
           setIsLoadingCityName(false);
         }
