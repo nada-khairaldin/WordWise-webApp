@@ -13,18 +13,6 @@
       }
     },
     {
-      "id": "bc2f",
-      "cityName": "Deinze",
-      "country": "Belgium",
-      "date": "2025-11-01T19:25:59.807Z",
-      "notes": "??",
-      "emoji": "BE",
-      "position": {
-        "lat": "51.7406361640977",
-        "lng": "-0.06591796875000001"
-      }
-    },
-    {
       "id": "c440",
       "cityName": "Vinaros",
       "country": "Spain",
@@ -37,15 +25,15 @@
       }
     },
     {
-      "id": "e0f6",
-      "cityName": "Martin Munoz de las Posadas",
-      "country": "Spain",
-      "date": "2025-11-01T19:28:42.964Z",
-      "notes": "gg",
-      "emoji": "ES",
+      "id": "96d0",
+      "cityName": "Moraviţa",
+      "country": "Romania",
+      "date": "2025-11-02T09:55:24.722Z",
+      "notes": "amazing :)",
+      "emoji": "RO",
       "position": {
-        "lat": "40.979898069620155",
-        "lng": "-4.548339843750001"
+        "lat": "45.30580259943578",
+        "lng": "21.29150390625"
       }
     }
   ]

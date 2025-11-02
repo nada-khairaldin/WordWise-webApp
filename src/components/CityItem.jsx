@@ -23,7 +23,7 @@ function CityItem({ city }) {
   return (
     <li>
       <Link
-        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+        to={`/app/cities/${id}?lat=${position.lat}&lng=${position.lng}`}
         className={`${styles.cityItem} ${
           id === currentCity.id ? styles["cityItem--active"] : ""
         }`} // to let the last selected city border highlighted
